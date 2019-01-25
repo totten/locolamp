@@ -8,8 +8,6 @@ default_environment:
  - PHPFPM_PORT=9000
  - REDIS_PORT=6379
  - XDEBUG_PORT=9000
- - MAIL_SMTP_PORT=1025
- - MAIL_HTTP_PORT=1080
 
 environment:
  - MYSQL_HOME=$LOCO_VAR/mysql/conf
@@ -37,6 +35,3 @@ services:
       - 'loco-mysql-init'
     run: 'mysqld --datadir="$LOCO_SVC_VAR/data"'
     pid_file: '$LOCO_SVC_VAR/run/mysql.pid'
-
-  mailcatcher:
-    run: 'mailcatcher --ip "$LOCALHOST" --smtp-port "$MAIL_SMTP_PORT" --http-port "$MAIL_HTTP_PORT" -f'

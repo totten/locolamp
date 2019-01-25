@@ -1,7 +1,7 @@
 # locolamp: An example loco project
 
 This is a small demonstration of using `nix-shell` and [loco](https://github.com/totten/loco).  It resembles a
-traditional "LAMP" (Apache + MySQL + PHP) stack...  and throws in some extras (like Redis and mailcatcher).  All
+traditional "LAMP" (Apache + MySQL + PHP) stack...  and throws in some extras (like Redis and Mailcatcher).  All
 services are running on `localhost`.
 
 ## Files and Directories
@@ -60,3 +60,40 @@ keeping old data, so I just destroy everything and restart everything:
 ```
 
 Note: All generated data is stored in the folder `.loco/var`.
+
+## Adding a new sevice (Mailcatcher)
+
+Mailcatcher is an email simulator which provides an SMTP service (usually on port 1025) and a webmail service (usually
+on port 1080). The introduction lied a little bit, though -- `locolamp` doesn't use it right now. Let's add it.
+
+Download the binaries for `mailcatcher` by updating `default.nix`:
+
+* Edit `default.nix`. In the list of `buildInputs`, add `pkgs.mailcatcher`
+* If you have an open `nix-shell`, close it.
+* Reopen with a new `nix-shell`. It will download the `mailcatcher` binaries.
+
+Then, declare the run command by updating `loco.yml`
+
+* Edit `.loco/loco.yml`. Under `services`, add a section for `mailcatcher` and specify the `run` command:
+  ```yaml
+  mailcatcher:
+    run: 'mailcatcher --smtp-port 1025 --http-port 1080 -f'
+  ```
+* Start `loco run mailcatcher` or `loco run` (for all services).
+
+Of course, stylistically, this doesn't quite match the other services (which
+accept environment variables as configuration options).  You can update
+`.loco/loco.yml` accordingly:
+
+    * Under `default_environment`, define the variables and their defaults:
+      ```yaml
+      default_environment
+      - MAIL_SMTP_PORT=1025
+      - MAIL_HTTP_PORT=1080
+      ```
+    * Under `services`, update the section for `mailcatcher` and specify the `run` command:
+      ```yaml
+      services:
+        mailcatcher:
+          run: 'mailcatcher --ip "$LOCALHOST" --smtp-port "$MAIL_SMTP_PORT" --http-port "$MAIL_HTTP_PORT" -f'
+      ```

@@ -27,7 +27,6 @@ in stdenv.mkDerivation rec {
       pkgs.apacheHttpd
       pkgs.mariadb
       pkgs.redis
-      pkgs.mailcatcher
 
       /* CLI utilities */
       extraPkgs.loco

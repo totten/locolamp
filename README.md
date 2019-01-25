@@ -7,7 +7,8 @@ services are running on `localhost`.
 ## Files and Directories
 
 * [web](web): Web root
-* [.loco/loco.yml](.loco/loco.yml): List of services
+* [default.nix](default.nix): List of software to download
+* [.loco/loco.yml](.loco/loco.yml): List of services to execute
 * [.loco/config/apache](.loco/config/apache): Apache configuration templates
 * [.loco/config/mysql](.loco/config/mysql): MySQL configuration templates
 * [.loco/config/php-fpm](.loco/config/php-fpm): PHP-FPM configuration templates

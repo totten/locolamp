@@ -85,15 +85,15 @@ Of course, stylistically, this doesn't quite match the other services (which
 accept environment variables as configuration options).  You can update
 `.loco/loco.yml` accordingly:
 
-    * Under `default_environment`, define the variables and their defaults:
-      ```yaml
-      default_environment
-      - MAIL_SMTP_PORT=1025
-      - MAIL_HTTP_PORT=1080
-      ```
-    * Under `services`, update the section for `mailcatcher` and specify the `run` command:
-      ```yaml
-      services:
-        mailcatcher:
-          run: 'mailcatcher --ip "$LOCALHOST" --smtp-port "$MAIL_SMTP_PORT" --http-port "$MAIL_HTTP_PORT" -f'
-      ```
+* Under `default_environment`, define the variables and their defaults:
+  ```yaml
+  default_environment
+  - MAIL_SMTP_PORT=1025
+  - MAIL_HTTP_PORT=1080
+  ```
+* Under `services`, update the section for `mailcatcher` and specify the `run` command:
+  ```yaml
+  services:
+    mailcatcher:
+     run: 'mailcatcher --ip "$LOCALHOST" --smtp-port "$MAIL_SMTP_PORT" --http-port "$MAIL_HTTP_PORT" -f'
+  ```

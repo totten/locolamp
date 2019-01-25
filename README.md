@@ -32,49 +32,54 @@ To stop the services, simply press `Ctrl-C`.
 
 What if you want to change the configuration?
 
-Some really common options are exposed as environment variables. You could restart with HTTPD on a different port:
+## Example: Changing the HTTP web-root
+
+By default, locolamp configures Apache to use the `web` folder as the web-root. What if your web-root lives somewhere else, such as `$HOME/src/webapp`? Simply edit [.loco/loco.yml](.loco/loco.yml) and set the variable `HTTPD_ROOT=$HOME/src/webapp`.
+
+(*Similarly, if you need to make a more nuanced changed to the configuration, edit the template [.loco/config/apache/conf/httpd.conf.loco.tpl](.loco/config/apache/conf/httpd.conf.loco.tpl).*)
+
+These changes will not necessarily take effect on their own. You may need to reinitialize the Apache service before starting. This will overwrite/destroy any auto-generated state/configuration:
 
 ```
-[nix-shell]$ export HTTPD_PORT=8080
 [nix-shell]$ loco init apache -f -v
 [nix-shell]$ loco run
 ```
 
-In practice, you may find it easier to alter the configuration by editing files like:
-
-* [.loco/loco.yml](.loco/loco.yml)
-* [.loco/config/apache/conf/httpd.conf.loco.tpl](.loco/config/apache/conf/httpd.conf.loco.tpl)
-
-After making configuration changes, you often need to re-initialize the service (`loco init -f ...`). This destroys+reinitializes any configuration files or data files created for that service.
-
-Since the services only used by the local development project, I find it easier to destroy+reinitialize *all* services at the same time, which can be boiled down to one command -- the "force-run":
+Since the services are only used by the local development project, I find it easier to destroy+reinitialize *all* services at the same time, which can be boiled down to one command -- the "force-run":
 
 ```
 [nix-shell]$ loco run -f -v
 ```
 
-## Adding a new sevice (Mailcatcher)
+## Example: Changing the HTTP web root - in one command
+
+Suppose you've got a PHP web app (`$HOME/src/webapp`) and you want to run it with the *loco*lamp configuration.  You can combine several of the above codes (`HTTPD_ROOT=$HOME/src/webapp`, `nix-shell`, `loco init -f`, `loco run`) into one command:
+
+```
+$ cd locolamp
+$ env HTTPD_ROOT=$HOME/webapp nix-shell --command 'loco run -f -v'
+```
+
+## Example: Adding a new sevice (Mailcatcher)
 
 Mailcatcher is an email simulator which provides an SMTP service (usually on
 port 1025) and a webmail service (usually on port 1080).  The introduction
 above claimed that Mailcatcher is included, but that was a little lie --
 it's not included now, but we can add it.
 
-First, download the binaries for `mailcatcher` by updating `default.nix`:
+First, (if it's running) shutdown `loco`. Exit the `nix-shell`. We want to start from a clean place.
 
-* If you have an open `[nix-shell]$` for `loco`, close that shell.
-* Edit `default.nix`. In the list of `buildInputs`, add `pkgs.mailcatcher`.
-* Open `nix-shell` anew. It will scan `default.nix` and auto-download `mailcatcher`.
+Next, edit `default.nix`. In the list of `buildInputs`, add `pkgs.mailcatcher`. Run `nix-shell` and it will automatically download `mailcatcher` (along with any other missing packages).
 
-Second, we need to add the `mailcatcher` service to loco:
+Then, we need to add the `mailcatcher` service to `loco`. Edit `.loco/loco.yml` and add a section for `mailcatcher`:
 
-* Edit `.loco/loco.yml`. Under `services`, add a section for `mailcatcher` and specify the `run` command:
   ```yaml
   services:
     mailcatcher:
       run: 'mailcatcher --smtp-port 1025 --http-port 1080 -f'
   ```
-* Start the service with `loco run mailcatcher` or `loco run` (for all services).
+
+Start the service with `loco run mailcatcher` or `loco run` (for all services).
 
 Of course, stylistically, this doesn't quite match the other services -- the
 port numbers are hard-coded.  To be more conventional, you can read them

@@ -85,9 +85,9 @@ Of course, stylistically, this doesn't quite match the other services (which
 accept environment variables as configuration options).  You can update
 `.loco/loco.yml` accordingly:
 
-* Under `default_environment`, define the variables and their defaults:
+* Under `default_environment`, define the variables and their values:
   ```yaml
-  default_environment
+  default_environment:
   - MAIL_SMTP_PORT=1025
   - MAIL_HTTP_PORT=1080
   ```
@@ -97,3 +97,5 @@ accept environment variables as configuration options).  You can update
     mailcatcher:
      run: 'mailcatcher --ip "$LOCALHOST" --smtp-port "$MAIL_SMTP_PORT" --http-port "$MAIL_HTTP_PORT" -f'
   ```
+
+And then start or restart the service.

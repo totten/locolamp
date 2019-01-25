@@ -25,8 +25,7 @@ services:
   apache:
     depends: [php-fpm]
     init:
-      - cp "$LOCO_SVC_CFG"/conf/{magic,mime.types} "$LOCO_SVC_VAR/conf"
-      - mk-apache-links
+      - 'loco-apache-init'
     run: 'apachectl -d "$LOCO_SVC_VAR" -DFOREGROUND'
     pid_file: '$LOCO_SVC_VAR/httpd.pid'
 

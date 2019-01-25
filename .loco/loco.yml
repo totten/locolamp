@@ -10,7 +10,8 @@ default_environment:
  - MYSQL_PORT=3306
  - PHPFPM_PORT=9000
  - REDIS_PORT=6379
- - XDEBUG_PORT=9000
+ ## FIXME: Add php.ini template which uses:
+ #- XDEBUG_PORT=9000
 
 ## The following are *mandatory* values for important environment variables.
 ## They will override any other values you might have set.
@@ -23,10 +24,12 @@ services:
   redis:
     run: 'redis-server --port "$REDIS_PORT" --bind "$LOCALHOST" --pidfile "$LOCO_SVC_VAR/redis.pid" --dir "$LOCO_SVC_VAR"'
     pid_file: '$LOCO_SVC_VAR/redis.pid'
+    message: 'Redis is running on "<comment>$LOCALHOST:$REDIS_PORT</comment>".'
 
   php-fpm:
-    run: 'php-fpm -y "$LOCO_SVC_VAR/php-fpm.conf" --nodaemonize'
+    run: 'php-fpm -y "$LOCO_SVC_VAR/php-fpm.conf"'
     pid_file: '$LOCO_SVC_VAR/php-fpm.pid'
+    message: 'PHP-FPM is running on "<comment>$LOCALHOST:$PHPFPM_PORT</comment>".'
 
   apache:
     depends: [php-fpm]
@@ -34,9 +37,11 @@ services:
       - 'loco-apache-init'
     run: 'apachectl -d "$LOCO_SVC_VAR" -DFOREGROUND'
     pid_file: '$LOCO_SVC_VAR/httpd.pid'
+    message: 'Apache HTTPD is running at "<comment>http://$LOCALHOST:$HTTPD_PORT</comment>" with content from "<comment>$HTTPD_ROOT</comment>".'
 
   mysql:
     init:
       - 'loco-mysql-init'
     run: 'mysqld --datadir="$LOCO_SVC_VAR/data"'
     pid_file: '$LOCO_SVC_VAR/run/mysql.pid'
+    message: 'MySQL is running on "<comment>$LOCALHOST:$MYSQL_PORT</comment>". The default credentials are user="<comment>root</comment>" and password="".'

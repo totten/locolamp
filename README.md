@@ -1,6 +1,6 @@
 # *loco*lamp: An example loco project
 
-This is small demonstration of the [loco process manager](https://github.com/totten/loco). It defines a "LAMP" stack (e.g. Apache + MySQL + PHP + Redis + Mailcatcher) for local development. It uses software from the [nix package manager](https://nixos.org/nix/).
+This is small demonstration of the [loco process manager](https://github.com/totten/loco). It defines a "LAMP" stack (e.g. Apache + MySQL + PHP + Redis + Mailcatcher) for *local development*. It uses software from the [nix package manager](https://nixos.org/nix/).
 
 ## Files and Directories
 
@@ -32,33 +32,26 @@ To stop the services, simply press `Ctrl-C`.
 
 What if you want to change the configuration?
 
-Some really common options are exposed as environment variables:
+Some really common options are exposed as environment variables. You could restart with HTTPD on a different port:
 
 ```
 [nix-shell]$ export HTTPD_PORT=8080
-```
-
-For other options, you may want to:
-
-* Edit the file `.loco/loco.yml`
-* Edit the file `.loco/config/apache/conf/httpd.conf.loco.tpl`
-
-After making changes to the configuration, you probably need to
-re-initialize the service and run it again, e.g
-
-```
-[nix-shell]$ loco init -f -v apache
+[nix-shell]$ loco init apache -f -v
 [nix-shell]$ loco run
 ```
 
-In practice, I don't like typing that much, and I often don't care about
-keeping old data, so I just destroy everything and restart everything:
+In practice, you may find it easier to alter the configuration by editing files like:
+
+* [.loco/loco.yml](.loco/loco.yml)
+* [.loco/config/apache/conf/httpd.conf.loco.tpl](.loco/config/apache/conf/httpd.conf.loco.tpl)
+
+After making configuration changes, you often need to re-initialize the service (`loco init -f ...`). This destroys+reinitializes any configuration files or data files created for that service.
+
+Since the services only used by the local development project, I find it easier to destroy+reinitialize *all* services at the same time, which can be boiled down to one command -- the "force-run":
 
 ```
 [nix-shell]$ loco run -f -v
 ```
-
-Note: All generated data is stored in the folder `.loco/var`.
 
 ## Adding a new sevice (Mailcatcher)
 

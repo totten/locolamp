@@ -1,18 +1,16 @@
 # locolamp: An example loco project
 
-This is a small demonstration of using `nix-shell` and [loco](https://github.com/totten/loco).  It resembles a
-traditional "LAMP" (Apache + MySQL + PHP) stack...  and throws in some extras (like Redis and Mailcatcher).  All
-services are running on `localhost`.
+This is small demonstration of the [loco process manager](https://github.com/totten/loco). It defines a "LAMP" stack (e.g. Apache + MySQL + PHP + Redis + Mailcatcher) for local development. It uses software from the [nix package manager](https://nixos.org/nix/).
 
 ## Files and Directories
 
-* [web](web): Web root
 * [default.nix](default.nix): List of software to download
 * [.loco/loco.yml](.loco/loco.yml): List of services to execute
 * [.loco/config/apache](.loco/config/apache): Apache configuration templates
 * [.loco/config/mysql](.loco/config/mysql): MySQL configuration templates
 * [.loco/config/php-fpm](.loco/config/php-fpm): PHP-FPM configuration templates
 * [.loco/config/redis](.loco/config/redis): Redis configuration templates
+* [web](web): Web root (containing any PHP/JS/CSS)
 
 ## Usage
 

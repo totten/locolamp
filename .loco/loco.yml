@@ -1,4 +1,7 @@
 format: 'loco-0.1'
+
+## The following are *default* values for important environment variables.
+## They are ignored if you have already set them elsewhere.
 default_environment:
  - HTTPD_DOMAIN=localhost
  - HTTPD_PORT=8000
@@ -9,9 +12,12 @@ default_environment:
  - REDIS_PORT=6379
  - XDEBUG_PORT=9000
 
+## The following are *mandatory* values for important environment variables.
+## They will override any other values you might have set.
 environment:
  - MYSQL_HOME=$LOCO_VAR/mysql/conf
 
+## The "services" are the programs we wish to run.
 services:
 
   redis:

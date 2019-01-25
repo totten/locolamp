@@ -13,8 +13,8 @@ let
     in f ((builtins.intersectAttrs (builtins.functionArgs f) allPkgs) // overrides);
 
   extraPkgs = {
-    #loco = callPackage (fetchTarball https://github.com/totten/loco/archive/master.tar.gz) {};
-    loco = callPackage /Users/totten/src/loco {};
+    loco = callPackage (fetchTarball https://github.com/totten/loco/archive/master.tar.gz) {};
+    # loco = callPackage /home/myuser/src/loco {};
   };
 
 in stdenv.mkDerivation rec {

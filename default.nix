@@ -49,7 +49,7 @@ let
   ## By default, we download a specific version of loco.  But if you had a
   ## local codebase for development purposes, you could use that instead.
 
-  loco = callPackage (fetchTarball https://github.com/totten/loco/archive/v0.1.0.tar.gz) {};
+  loco = callPackage (fetchTarball https://github.com/totten/loco/archive/v0.1.1.tar.gz) {};
   # loco = callPackage /home/myuser/src/loco {};
 
 ################################################################################

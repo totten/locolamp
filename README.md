@@ -34,7 +34,7 @@ What if you want to change the configuration?
 
 ## Example: Changing the HTTP web-root
 
-By default, locolamp configures Apache to use the `web` folder as the web-root. What if your web-root lives somewhere else, such as `$HOME/src/webapp`? Simply edit [.loco/loco.yml](.loco/loco.yml) and set the variable `HTTPD_ROOT=$HOME/src/webapp`.
+By default, *loco*lamp configures Apache to use the `./web` (literally `$LOCO_PRJ/web`)) folder as the web-root. What if your web-root lives somewhere else, such as `$HOME/src/webapp`? Simply edit [.loco/loco.yml](.loco/loco.yml) and set the variable `HTTPD_ROOT=$HOME/src/webapp`.
 
 (*Similarly, if you need to make a more nuanced changed to the configuration, edit the template [.loco/config/apache/conf/httpd.conf.loco.tpl](.loco/config/apache/conf/httpd.conf.loco.tpl).*)
 
@@ -62,10 +62,9 @@ $ env HTTPD_ROOT=$HOME/webapp nix-shell --command 'loco run -f -v'
 
 ## Example: Adding a new sevice (Mailcatcher)
 
-Mailcatcher is an email simulator which provides an SMTP service (usually on
-port 1025) and a webmail service (usually on port 1080).  The introduction
-above claimed that Mailcatcher is included, but that was a little lie --
-it's not included now, but we can add it.
+Mailcatcher is an email simulator which provides an SMTP service (usually on port 1025) and a webmail service (usually
+on port 1080).  At the start, the introduction claimed that Mailcatcher is included, but that was a little lie -- it's
+not included now, but we can add it.
 
 First, (if it's running) shutdown `loco`. Exit the `nix-shell`. We want to start from a clean place.
 

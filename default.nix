@@ -7,12 +7,16 @@
 ################################################################################
 ## Import a list of available software packages.
 ##
-## Observe: The list of available software comes from Github ("https://github.com/OWNER/PROJECT/archive/REF.tar.gz").
+## Observe: The list of available software comes from Github (`https://github.com/OWNER/PROJECT/archive/REF.tar.gz`).
 ## The Github URLs can be changed to reference:
-##  - Branches (if you want use a general version and periodically get updates)
-##  - Tags (if you want a specific release)
-##  - Commits (if you want to peg a very precise version)
-##  - Unofficial forks/projects
+##
+##  - Branches
+##  - Tags or commits
+##  - Unofficial forks (different owners/projects)
+##
+## Referencing a branch means that `nix-shell` will (from time to time) automatically get
+## newer versions of the packages. Referencing a tag or commit means that
+## the exact versions of the software will be locked.
 
 let
 
@@ -68,6 +72,7 @@ in pkgs.stdenv.mkDerivation rec {
       pkgs.apacheHttpd     /* ... or pkgs.nginx ... */
       pkgs.mariadb         /* ... or pkgs.mysql57, pkgs.mysql55 ... */
       pkgs.redis           /* ... or pkgs.memcached ... */
+      # pkgs.mailcatcher
 
       ## CLI utilities
       loco

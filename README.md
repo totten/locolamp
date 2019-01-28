@@ -34,9 +34,9 @@ What if you want to change the configuration? Check the file-list and the exampl
 
 ## Example: Changing the HTTP web-root
 
-By default, *loco*lamp configures Apache to use the `./web` (literally `$LOCO_PRJ/web`)) folder as the web-root. What if your web-root lives somewhere else, such as `$HOME/src/webapp`? Simply edit [.loco/loco.yml](.loco/loco.yml) and set the variable `HTTPD_ROOT=$HOME/src/webapp`.
+By default, *loco*lamp configures Apache to use the `./web` folder (literally `$LOCO_PRJ/web`) as the web-root. What if your web-root lives somewhere else, such as `$HOME/src/webapp`? Simply edit [.loco/loco.yml](.loco/loco.yml) and set the variable `HTTPD_ROOT=$HOME/src/webapp`.
 
-(*Similarly, if you need to make a more nuanced changed to the configuration, edit the template [.loco/config/apache/conf/httpd.conf.loco.tpl](.loco/config/apache/conf/httpd.conf.loco.tpl).*)
+(*Similarly, if you need to make a more nuanced changes to the configuration, edit the template [.loco/config/apache/conf/httpd.conf.loco.tpl](.loco/config/apache/conf/httpd.conf.loco.tpl).*)
 
 These changes will not necessarily take effect on their own. You may need to reinitialize the Apache service before starting. This will overwrite/destroy any auto-generated state/configuration:
 
@@ -45,19 +45,20 @@ These changes will not necessarily take effect on their own. You may need to rei
 [nix-shell]$ loco run
 ```
 
-Since the services are only used by the local development project, I find it easier to destroy+reinitialize *all* services at the same time, which can be boiled down to one command -- the "force-run":
+Since the services are only used by the local development project, I often don't care about retaining the data. It's easier to destroy+reinitialize+run *all* services at the same time, which can be boiled down to one command:
 
 ```
 [nix-shell]$ loco run -f -v
 ```
 
-## Example: Changing the HTTP web root - in one command
+## Example: Quick start with alternate HTTP web-root
 
-Suppose you've got a PHP web app (`$HOME/src/webapp`) and you want to run it with the *loco*lamp configuration.  You can combine several of the above codes (`HTTPD_ROOT=$HOME/src/webapp`, `nix-shell`, `loco init -f`, `loco run`) into one command:
+You can combine several of the above codes (`HTTPD_ROOT=$HOME/src/webapp`, `nix-shell`, `loco init -f`, `loco run`) yielding a pithy variant:
 
 ```
+$ git clone https://github.com/totten/locolamp
 $ cd locolamp
-$ env HTTPD_ROOT=$HOME/webapp nix-shell --command 'loco run -f -v'
+$ env HTTPD_ROOT=$HOME/src/webapp nix-shell --command 'loco run -f -v'
 ```
 
 ## Example: Adding a new sevice (Mailcatcher)

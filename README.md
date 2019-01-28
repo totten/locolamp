@@ -2,19 +2,9 @@
 
 This is small demonstration of the [loco process manager](https://github.com/totten/loco). It defines a "LAMP" stack (e.g. Apache + MySQL + PHP + Redis + Mailcatcher) for *local development*. It uses software from the [nix package manager](https://nixos.org/nix/).
 
-## Files and Directories
+## Quick Start
 
-* [default.nix](default.nix): List of software to download
-* [.loco/loco.yml](.loco/loco.yml): List of services to execute
-* [.loco/config/apache](.loco/config/apache): Apache configuration templates
-* [.loco/config/mysql](.loco/config/mysql): MySQL configuration templates
-* [.loco/config/php-fpm](.loco/config/php-fpm): PHP-FPM configuration templates
-* [.loco/config/redis](.loco/config/redis): Redis configuration templates
-* [web](web): Web root (containing any PHP/JS/CSS)
-
-## Usage
-
-After installing the [nix package manager](https://nixos.org/nix/), run:
+Install the [nix package manager](https://nixos.org/nix/) and then run:
 
 ```
 $ git clone https://github.com/totten/locolamp
@@ -30,7 +20,17 @@ them in the foreground.  You can then open a web page, e.g.
 
 To stop the services, simply press `Ctrl-C`.
 
-What if you want to change the configuration?
+What if you want to change the configuration? Check the file-list and the examples below.
+
+## Files and Directories
+
+* [default.nix](default.nix): List of software to download
+* [.loco/loco.yml](.loco/loco.yml): List of services to execute
+* [.loco/config/apache](.loco/config/apache): Apache configuration templates
+* [.loco/config/mysql](.loco/config/mysql): MySQL configuration templates
+* [.loco/config/php-fpm](.loco/config/php-fpm): PHP-FPM configuration templates
+* [.loco/config/redis](.loco/config/redis): Redis configuration templates
+* [web](web): Web root (containing any PHP/JS/CSS)
 
 ## Example: Changing the HTTP web-root
 

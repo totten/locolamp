@@ -60,46 +60,33 @@ let
 ## Now, we have a list of available software packages.
 ## Let's define the "locolamp" project and include some specific dependencies.
 
-in pkgs.stdenv.mkDerivation rec {
+in [
+  ## Major services
+  pkgs.php72           /* ... or pkgs.php71, oldPkgs.php70, oldPkgs.php56 ... */
+  pkgs.nodejs-6_x      /* ... or pkgs.nodejs-10_x, pkgs.nodes-6_x  ... */
+  pkgs.apacheHttpd     /* ... or pkgs.nginx ... */
+  pkgs.mariadb         /* ... or pkgs.mysql57, pkgs.mysql55 ... */
+  pkgs.redis           /* ... or pkgs.memcached ... */
+  # pkgs.mailcatcher
 
-    name = "locolamp";
+  ## CLI utilities
+  loco
+  pkgs.bzip2
+  pkgs.curl
+  pkgs.git
+  pkgs.gnutar
+  pkgs.hostname
+  pkgs.ncurses
+  pkgs.patch
+  pkgs.php72Packages.composer
+  pkgs.rsync
+  pkgs.unzip
+  pkgs.which
+  pkgs.zip
 
-    ## Define a list of packages required for "locolamp".
-    buildInputs = [
-      ## Major services
-      pkgs.php72           /* ... or pkgs.php71, oldPkgs.php70, oldPkgs.php56 ... */
-      pkgs.nodejs-6_x      /* ... or pkgs.nodejs-10_x, pkgs.nodes-6_x  ... */
-      pkgs.apacheHttpd     /* ... or pkgs.nginx ... */
-      pkgs.mariadb         /* ... or pkgs.mysql57, pkgs.mysql55 ... */
-      pkgs.redis           /* ... or pkgs.memcached ... */
-      # pkgs.mailcatcher
-
-      ## CLI utilities
-      loco
-      pkgs.bzip2
-      pkgs.curl
-      pkgs.git
-      pkgs.gnutar
-      pkgs.hostname
-      pkgs.ncurses
-      pkgs.patch
-      pkgs.php72Packages.composer
-      pkgs.rsync
-      pkgs.unzip
-      pkgs.which
-      pkgs.zip
-
-      ## Aside: Downloading a different version of PHP or MySQL or NodeJS is
-      ## simple, but bear in mind: this is upgrading (or downgrading).  You
-      ## may need to change configuration files to match.  Most services are
-      ## pretty good about forward-compatibility, but some (*ahem* MySQL)
-      ## may give errors and require edits to the configuration.
-    ];
-
-  ## When starting `nix-shell`, load all the project-wide config variables from `loco.yml`.
-  ## This ensures that, e.g., the `mysql` and `mysqldump` commands have the right `MYSQL_HOME`.
-  shellHook = ''
-    eval $(loco env --export)
-  '';
-
-}
+  ## Aside: Downloading a different version of PHP or MySQL or NodeJS is
+  ## simple, but bear in mind: this is upgrading (or downgrading).  You
+  ## may need to change configuration files to match.  Most services are
+  ## pretty good about forward-compatibility, but some (*ahem* MySQL)
+  ## may give errors and require edits to the configuration.
+]

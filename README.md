@@ -13,8 +13,7 @@ $ nix-shell
 [nix-shell]$ loco run
 ```
 
-This will initialize data/configuration files for each service and launch
-them in the foreground.  You can then open a web page, e.g.
+This will initialize the data/configuration files in `.loco/var` and launch the services in the foreground.  You can then open a web page, e.g.
 
 * http://127.0.0.1:8000/
 

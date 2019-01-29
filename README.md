@@ -69,7 +69,7 @@ not included now, but we can add it.
 
 First, (if it's running) shutdown `loco`. Exit the `nix-shell`. We want to start from a clean place.
 
-Next, edit `default.nix`. In the list of `buildInputs`, add `pkgs.mailcatcher`. Run `nix-shell` and it will automatically download `mailcatcher` (along with any other missing packages).
+Next, edit `default.nix`. In the list of dependencies, uncomment `pkgs.mailcatcher`. Run `nix-shell` and it will automatically download `mailcatcher` (along with any other missing packages).
 
 Then, we need to add the `mailcatcher` service to `loco`. Edit `.loco/loco.yml` and add a section for `mailcatcher`:
 
@@ -106,3 +106,50 @@ To see if the variables are being used, set a variable and (re)start the service
 ```
 
 In a web browser, you should find the simulated webmail at http://127.0.0.1:1111 
+
+## Example: PhpStorm with nix PHP
+
+In the "Quick Start", we used `nix-shell` to open a subshell with a suitable
+environment.  For example, it sets a `PATH` which includes the PHP folder
+`/nix/store/03z7c0xrd530lpcc7f57s5mfaqg0fdvj-php-7.2.13/bin`.
+
+In PhpStorm, the IDE needs a reference to the PHP interpreter.  Pointing it
+to `/nix/store/03z7...` is a bit ugly (and hard to maintain during
+upgrades).  Instead, you can create a "profile" -- a folder which links to
+all the packages from `locolamp`.  In this example, we put all the packages
+under `/nix/var/nix/profiles/per-user/$USER/locolamp`:
+
+```
+$ cd locolamp
+$ nix-env -p /nix/var/nix/profiles/per-user/$USER/locolamp -i -f .
+```
+
+Note: Upgrades won't be automatic; so you may want to periodically
+reinstall the profile.
+
+## Example: Use locolamp in the default shell
+
+In the "Quick Start", we used `nix-shell` to open a subshell with a suitable
+environment.  We will always have to open a subshell before running commands
+like `mysql` or `composer`.  I like this because it's easy to switch between
+different configurations, however...  if you always use one configuration, then this
+could feel inconvenient.
+
+You can bring the full locolamp stack into your default shell (so that
+`nix-shell` isn't needed on a day-to-day basis):
+
+```
+$ git clone https://github.com/totten/locolamp ~/src/locolamp
+$ nix-env -i -f ~/src/locolamp/
+```
+
+And optionally load the environment variables from `loco.yml` at startup
+by adding this to the shell initialization script (`~/.profile` or
+`~/.bashrc`):
+
+```bash
+eval $( loco env --cwd ~/src/locolamp/ --export )
+```
+
+Note: Upgrades won't be automatic; so you may want to periodically
+reinstall the profile.

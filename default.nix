@@ -1,5 +1,9 @@
 ## locolamp: Download a collection of binaries for use in "LAMP"-style development
 ## (Apache, MySQL, PHP, NodeJS, etc). Binaries are downloaded from nixpkgs.
+##
+## This file is generally organized into sections:
+## 1. Import a list of available software packages.
+## 2. Pick a list of specific packages.
 {
   system ? builtins.currentSystem,
 }:
@@ -71,25 +75,24 @@ let
 ## Let's define the "locolamp" project and include some specific dependencies.
 
 in [
-  ## Major services
-  pkgs.php72           /* ... or pkgs.php71, oldPkgs.php70, oldPkgs.php56 ... */
-  pkgs.nodejs-6_x      /* ... or pkgs.nodejs-10_x, pkgs.nodes-6_x  ... */
+  ## Major services / runtimes
   pkgs.apacheHttpd     /* ... or pkgs.nginx ... */
   pkgs.mariadb         /* ... or pkgs.mysql57, pkgs.mysql55 ... */
+  pkgs.nodejs-6_x      /* ... or pkgs.nodejs-10_x, pkgs.nodes-6_x  ... */
   pkgs.redis           /* ... or pkgs.memcached ... */
-  # pkgs.mailcatcher
 
-  ## PHP Extensions
+  pkgs.php72           /* ... or pkgs.php71, oldPkgs.php70, oldPkgs.php56 ... */
   (phpExtLoader {
     zendExts = [
       pkgs.php72Packages.xdebug
     ];
     stdExts = [
       pkgs.php72Packages.redis
-      pkgs.php72Packages.memcached
       pkgs.php72Packages.imagick
     ];
   })
+
+  # pkgs.mailcatcher
 
   ## CLI utilities
   loco

@@ -30,7 +30,14 @@ let
   ## Observe: The notation `import (...url...) {...options...}` accepts a list of options.
   ## This can be useful if you need custom compilation options for some packages.
 
-  pkgs = import (fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-18.09.tar.gz) { inherit system; };
+  pkgs = import (fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-18.09.tar.gz) {
+    inherit system;
+    # config = {
+    #   php = {
+    #     mysqlnd = true;
+    #   };
+    # };
+  };
 
   ####
   ## Import an older version of the standard package repository (nixpkgs v18.03). Assign it the name "oldPkgs".
@@ -56,6 +63,9 @@ let
   loco = callPackage (fetchTarball https://github.com/totten/loco/archive/v0.1.1.tar.gz) {};
   # loco = callPackage /home/myuser/src/loco {};
 
+  ## Generating php.ini requires some special work.
+  phpExtLoader = extSpec: (callPackage ./.loco/pkgs/php-exts/default.nix ({ inherit pkgs; } // extSpec));
+
 ################################################################################
 ## Now, we have a list of available software packages.
 ## Let's define the "locolamp" project and include some specific dependencies.
@@ -69,6 +79,18 @@ in [
   pkgs.redis           /* ... or pkgs.memcached ... */
   # pkgs.mailcatcher
 
+  ## PHP Extensions
+  (phpExtLoader {
+    zendExts = [
+      pkgs.php72Packages.xdebug
+    ];
+    stdExts = [
+      pkgs.php72Packages.redis
+      pkgs.php72Packages.memcached
+      pkgs.php72Packages.imagick
+    ];
+  })
+
   ## CLI utilities
   loco
   pkgs.bzip2
@@ -79,6 +101,7 @@ in [
   pkgs.ncurses
   pkgs.patch
   pkgs.php72Packages.composer
+  pkgs.php72Packages.redis
   pkgs.rsync
   pkgs.unzip
   pkgs.which

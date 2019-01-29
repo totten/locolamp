@@ -26,11 +26,8 @@ What if you want to change the configuration? Check the file-list and the exampl
 
 * [default.nix](default.nix): List of software to download
 * [.loco/loco.yml](.loco/loco.yml): List of services to execute
-* [.loco/config/apache](.loco/config/apache): Apache configuration templates
-* [.loco/config/mysql](.loco/config/mysql): MySQL configuration templates
-* [.loco/config/php-fpm](.loco/config/php-fpm): PHP-FPM configuration templates
-* [.loco/config/redis](.loco/config/redis): Redis configuration templates
-* [web](web): Web root (containing any PHP/JS/CSS)
+* [.loco/config](.loco/config): Configuration templates
+* [web](web): Web root (containing any HTML/PHP/JS/CSS)
 
 ## Example: Changing the HTTP web-root
 
@@ -64,8 +61,8 @@ $ env HTTPD_ROOT=$HOME/src/webapp nix-shell --command 'loco run -f -v'
 ## Example: Adding a new sevice (Mailcatcher)
 
 Mailcatcher is an email simulator which provides an SMTP service (usually on port 1025) and a webmail service (usually
-on port 1080).  At the start, the introduction claimed that Mailcatcher is included, but that was a little lie -- it's
-not included now, but we can add it.
+on port 1080).  At the start, the introduction claimed that Mailcatcher was included.  That was a little lie -- it's
+not included *now*, but we can add it!
 
 First, (if it's running) shutdown `loco`. Exit the `nix-shell`. We want to start from a clean place.
 

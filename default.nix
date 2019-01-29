@@ -78,7 +78,7 @@ in [
   ## Major services / runtimes
   pkgs.apacheHttpd     /* ... or pkgs.nginx ... */
   pkgs.mariadb         /* ... or pkgs.mysql57, pkgs.mysql55 ... */
-  pkgs.nodejs-6_x      /* ... or pkgs.nodejs-10_x, pkgs.nodes-6_x  ... */
+  pkgs.nodejs-10_x     /* ... or pkgs.nodejs-8_x, pkgs.nodes-6_x  ... */
   pkgs.redis           /* ... or pkgs.memcached ... */
 
   pkgs.php72           /* ... or pkgs.php71, oldPkgs.php70, oldPkgs.php56 ... */

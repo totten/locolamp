@@ -3,4 +3,6 @@
 mkdir -p $LOCO_SVC_VAR/php.ini.d
 
 ## The list of extension paths needs to generated via nix.
-php-exts > $LOCO_SVC_VAR/php.ini.d/extensions.ini
+if which php-exts 2>/dev/null > /dev/null; then
+  php-exts > $LOCO_SVC_VAR/php.ini.d/extensions.ini
+fi

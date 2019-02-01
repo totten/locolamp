@@ -64,8 +64,10 @@ let
   ## By default, we download a specific version of loco.  But if you had a
   ## local codebase for development purposes, you could use that instead.
 
-  loco = callPackage (fetchTarball https://github.com/totten/loco/archive/v0.1.1.tar.gz) {};
-  # loco = callPackage /home/myuser/src/loco {};
+  loco = callPackage (fetchTarball https://github.com/totten/loco/archive/v0.2.0.tar.gz) {};
+  # loco = callPackage /home/myuser/src/loco { inherit pkgs; };
+
+  ramdisk = callPackage (fetchTarball https://github.com/totten/ramdisk/archive/5c699fbeb8ce3d8f3862a726e1e2684067b237dd.tar.gz) {};
 
   ## Generating php.ini requires some special work.
   phpExtLoader = extSpec: (callPackage ./.loco/pkgs/php-exts/default.nix ({ inherit pkgs; } // extSpec));
@@ -76,6 +78,7 @@ let
 
 in [
   ## Major services / runtimes
+  ramdisk
   pkgs.apacheHttpd     /* ... or pkgs.nginx ... */
   pkgs.mariadb         /* ... or pkgs.mysql57, pkgs.mysql55 ... */
   pkgs.nodejs-10_x     /* ... or pkgs.nodejs-8_x, pkgs.nodes-6_x  ... */

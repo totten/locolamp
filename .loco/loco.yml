@@ -11,12 +11,20 @@ default_environment:
  - PHPFPM_PORT=9000
  - REDIS_PORT=6379
  - XDEBUG_PORT=9000
+ - RAMDISK_SIZE=300
 
 ## The following are *mandatory* values for important environment variables.
 ## They will override any other values you might have set.
 environment:
  - PHP_INI_SCAN_DIR=$LOCO_VAR/php/php.ini.d:$LOCO_PRJ/.loco/config/php/php.ini.d
  - MYSQL_HOME=$LOCO_VAR/mysql/conf
+
+## All service data will be stored in a ramdisk.
+## If you prefer to use a physical disk, comment out this section.
+volume:
+  init: 'ramdisk start "$LOCO_VAR" "$RAMDISK_SIZE"'
+  cleanup: 'ramdisk stop "$LOCO_VAR"'
+  message: 'Loco data volume is a ram disk at "<comment>$LOCO_VAR</comment>".'
 
 ## The "services" are the programs we wish to run.
 services:

@@ -36,11 +36,6 @@ let
 
   pkgs = import (fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-18.09.tar.gz) {
     inherit system;
-    # config = {
-    #   php = {
-    #     mysqlnd = true;
-    #   };
-    # };
   };
 
   ####
@@ -51,8 +46,18 @@ let
   ##
   ## Observe: This is not commonly done in the official "nixpkgs", but it's
   ## handy if you need to mix+match different versions.
+  ##
+  ## Observe: Older builds used libmysqlclient instead of mysqlnd.  That can
+  ## be problematic with, e.g., Drush+Drupal 8.
 
-  oldPkgs = import (fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-18.03.tar.gz) { inherit system; };
+  oldPkgs = import (fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-18.03.tar.gz) {
+    inherit system;
+    config = {
+      php = {
+        mysqlnd = true;
+      };
+    };
+  };
 
   ####
   ## Import some specific packages that are not available in nixpkgs.

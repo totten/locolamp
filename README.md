@@ -13,11 +13,13 @@ $ nix-shell
 [nix-shell]$ loco run
 ```
 
-This will initialize the data/configuration files in `.loco/var` and launch the services in the foreground.  You can then open a web page, e.g.
+This will create a RAM-disk, initialize the data/configuration files in `.loco/var`, and launch the services in the foreground.  You can then open a web page, e.g.
 
 * http://127.0.0.1:8000/
 
 To stop the services, simply press `Ctrl-C`.
+
+To start again, run `loco run` again. To destroy the ramdisk and any service data, run `loco clean`.
 
 What if you want to change the configuration? Check the file-list and the examples below.
 

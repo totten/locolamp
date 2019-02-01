@@ -69,7 +69,7 @@ let
   ## By default, we download a specific version of loco.  But if you had a
   ## local codebase for development purposes, you could use that instead.
 
-  loco = callPackage (fetchTarball https://github.com/totten/loco/archive/v0.2.0.tar.gz) {};
+  loco = callPackage (fetchTarball https://github.com/totten/loco/archive/v0.2.1.tar.gz) {};
   # loco = callPackage /home/myuser/src/loco { inherit pkgs; };
 
   ramdisk = callPackage (fetchTarball https://github.com/totten/ramdisk/archive/5c699fbeb8ce3d8f3862a726e1e2684067b237dd.tar.gz) {};

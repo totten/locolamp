@@ -7,6 +7,7 @@ This is small demonstration of the [loco process manager](https://github.com/tot
 Install the [nix package manager](https://nixos.org/nix/) and then run:
 
 ```
+$ nix-env -iA cachix -f https://cachix.org/api/v1/install && cachix use locolamp
 $ git clone https://github.com/totten/locolamp
 $ cd locolamp
 $ nix-shell

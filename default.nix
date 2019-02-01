@@ -107,7 +107,6 @@ in [
   pkgs.ncurses
   pkgs.patch
   pkgs.php72Packages.composer
-  pkgs.php72Packages.redis
   pkgs.rsync
   pkgs.unzip
   pkgs.which

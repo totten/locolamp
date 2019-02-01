@@ -35,23 +35,20 @@ services:
     message: 'Redis is running on "<comment>$LOCALHOST:$REDIS_PORT</comment>".'
 
   php:
-    init:
-      - 'loco-php-init'
+    init: 'loco-php-init'
     run: 'php-fpm -y "$LOCO_SVC_VAR/php-fpm.conf"'
     pid_file: '$LOCO_SVC_VAR/php-fpm.pid'
     message: 'PHP-FPM is running on "<comment>$LOCALHOST:$PHPFPM_PORT</comment>" with config files in "<comment>$LOCO_SVC_VAR/php.ini.d</comment>" and "<comment>$LOCO_SVC_CFG/php.ini.d</comment>".'
 
   apache:
     depends: [php]
-    init:
-      - 'loco-apache-init'
+    init: 'loco-apache-init'
     run: 'apachectl -d "$LOCO_SVC_VAR" -DFOREGROUND'
     pid_file: '$LOCO_SVC_VAR/httpd.pid'
     message: 'Apache HTTPD is running at "<comment>http://$LOCALHOST:$HTTPD_PORT</comment>" with content from "<comment>$HTTPD_ROOT</comment>".'
 
   mysql:
-    init:
-      - 'loco-mysql-init'
+    init: 'loco-mysql-init'
     run: 'mysqld --datadir="$LOCO_SVC_VAR/data"'
     pid_file: '$LOCO_SVC_VAR/run/mysql.pid'
     message: 'MySQL is running on "<comment>$LOCALHOST:$MYSQL_PORT</comment>". The default credentials are user="<comment>root</comment>" and password="".'

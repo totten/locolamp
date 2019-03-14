@@ -4,6 +4,7 @@
 ## This file is generally organized into sections:
 ## 1. Import a list of available software packages.
 ## 2. Pick a list of specific packages.
+
 {
   system ? builtins.currentSystem,
 }:
@@ -48,7 +49,8 @@ let
   ## handy if you need to mix+match different versions.
   ##
   ## Observe: Older builds used libmysqlclient instead of mysqlnd.  That can
-  ## be problematic with, e.g., Drush+Drupal 8.
+  ## be problematic with, e.g., Drush+Drupal 8. So we set some custom build
+  ## options.
 
   oldPkgs = import (fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-18.03.tar.gz) {
     inherit system;
@@ -62,6 +64,7 @@ let
   ####
   ## Import some specific packages that are not available in nixpkgs.
 
+  ## "callPackage" is a common helper/convention that makes it easier to get other packages.
   callPackage = path: overrides:
     let f = import path;
     in f ((builtins.intersectAttrs (builtins.functionArgs f) pkgs) // overrides);
@@ -120,6 +123,6 @@ in [
   ## Aside: Downloading a different version of PHP or MySQL or NodeJS is
   ## simple, but bear in mind: this is upgrading (or downgrading).  You
   ## may need to change configuration files to match.  Most services are
-  ## pretty good about forward-compatibility, but some (*ahem* MySQL)
+  ## pretty good about forward-compatibility, but some (*ahem*MySQL*MariaDB*)
   ## may give errors and require edits to the configuration.
 ]

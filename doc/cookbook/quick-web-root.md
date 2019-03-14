@@ -1,6 +1,6 @@
-## Cookbook: Quick start with alternate HTTP web-root
+## Cookbook: Quick start: Using alternate HTTP web-root
 
-You can combine several of the codes from [Config files with alternate the HTTP web-root](doc/cookbook/web-root.md)
+You can combine several of the codes from [Config files with alternate the HTTP web-root](web-root.md)
 (e.g. `HTTPD_ROOT=$HOME/src/webapp`, `nix-shell`, `loco init -f`, `loco run`) and make one pithy variant:
 
 ```

@@ -1,4 +1,4 @@
-## Cookbook: PhpStorm with nix PHP
+## Cookbook: Using PhpStorm with nix PHP
 
 In the "Quick Start", we used `nix-shell` to open a subshell with a suitable
 environment.  For example, it sets a `PATH` which includes the PHP folder

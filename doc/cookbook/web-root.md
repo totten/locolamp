@@ -1,4 +1,4 @@
-## Cookbook: Changing the HTTP web-root
+## Cookbook: Config files: Using alternate HTTP web-root
 
 By default, *loco*lamp configures Apache to use the `./web` folder (literally `$LOCO_PRJ/web`) as the web-root. What if your web-root lives somewhere else, such as `$HOME/src/webapp`? Simply edit [.loco/loco.yml](.loco/loco.yml) and set the variable `HTTPD_ROOT=$HOME/src/webapp`.
 
@@ -17,4 +17,4 @@ Since the services are only used by the local development project, I often don't
 [nix-shell]$ loco run -f -v
 ```
 
-*See also: Quick start with alternate HTTP web-root](quick-web-root.md)*
+*See also: [Quick start with alternate HTTP web-root](quick-web-root.md)*

@@ -1,4 +1,4 @@
-## Cookbook: Use locolamp in the default shell
+## Cookbook: Using locolamp in the default shell
 
 In the "Quick Start", we used `nix-shell` to open a subshell with a suitable
 environment.  We will always have to open a subshell before running commands

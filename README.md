@@ -4,7 +4,13 @@ This is small demonstration of the [loco process manager](https://github.com/tot
 
 ## Quick Start
 
-Install the [nix package manager](https://nixos.org/nix/) and then run:
+Install the [nix package manager](https://nixos.org/nix/):
+
+```
+curl https://nixos.org/nix/install | sh
+```
+
+And then run:
 
 ```
 $ nix-env -iA cachix -f https://cachix.org/api/v1/install && cachix use locolamp
@@ -22,7 +28,7 @@ To stop the services, simply press `Ctrl-C`.
 
 To start again, run `loco run` again. To destroy the ramdisk and any service data, run `loco clean`.
 
-What if you want to change the configuration? Check the file-list and the examples below.
+What if you want to change the configuration? Check the file-list and the cookbook/examples below.
 
 ## Files and Directories
 
@@ -33,8 +39,8 @@ What if you want to change the configuration? Check the file-list and the exampl
 
 ## Cookbook
 
-* [Config files with alternate the HTTP web-root](doc/cookbook/web-root.md)
-* [Quick start with alternate HTTP web-root](doc/cookbook/quick-web-root.md)
+* [Config files: Using alternate HTTP web-root](doc/cookbook/web-root.md)
+* [Quick start: Using alternate HTTP web-root](doc/cookbook/quick-web-root.md)
 * [Adding a new service (Mailcatcher)](doc/cookbook/mailcatcher.md)
-* [PhpStorm with nix PHP](doc/cookbook/phpstorm.md)
-* [Use locolamp in the default shel](doc/cookbook/default-shell.md)
+* [Using PhpStorm with nix PHP](doc/cookbook/phpstorm.md)
+* [Using locolamp in the default shel](doc/cookbook/default-shell.md)

@@ -1,6 +1,6 @@
 # *loco*lamp: An example loco project
 
-This is small demonstration of the [loco process manager](https://github.com/totten/loco). It defines a "LAMP" stack (e.g. Apache + MySQL + PHP + Redis + Mailcatcher) for *local development*. It uses software from the [nix package manager](https://nixos.org/nix/).
+This is small demonstration of the  [nix package manager](https://nixos.org/nix/) and [loco process manager](https://github.com/totten/loco). It defines a "LAMP" stack (e.g. Apache + MySQL + PHP + NodeJS + Redis + Mailcatcher) for *local development*.
 
 ## Quick Start
 

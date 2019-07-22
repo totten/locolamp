@@ -24,7 +24,26 @@ This will create a RAM-disk, initialize the data/configuration files in `.loco/v
 
 * http://127.0.0.1:8000/
 
-To stop the services, simply press `Ctrl-C`.
+To work CLI commands (such as `php` or `mysql`), open a new console tab and open `nix-shell` again:
+
+```
+$ cd locolamp
+$ nix-shell
+
+[nix-shell:~/src/locolamp]$ mysql
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 9
+Server version: 10.2.17-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> CREATE DATABASE exampledb;
+Query OK, 1 row affected (0.00 sec)
+```
+
+To stop the services, return to the original console (`loco run`) and press `Ctrl-C`.
 
 To start again, run `loco run` again. To destroy the ramdisk and any service data, run `loco clean`.
 

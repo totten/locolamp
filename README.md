@@ -24,7 +24,7 @@ This will create a RAM-disk, initialize the data/configuration files in `.loco/v
 
 * http://127.0.0.1:8000/
 
-To work CLI commands (such as `php` or `mysql`), open a new console tab and open `nix-shell` again:
+To run CLI commands (such as `php` or `mysql`), open a new console tab and open `nix-shell` again:
 
 ```
 $ cd locolamp
@@ -45,7 +45,9 @@ Query OK, 1 row affected (0.00 sec)
 
 To stop the services, return to the original console (`loco run`) and press `Ctrl-C`.
 
-To start again, run `loco run` again. To destroy the ramdisk and any service data, run `loco clean`.
+To start again, run `loco run` again.
+
+To destroy the ramdisk and any service data, run `loco clean`.
 
 What if you want to change the configuration? Check the file-list and the cookbook/examples below.
 
@@ -62,4 +64,4 @@ What if you want to change the configuration? Check the file-list and the cookbo
 * [Quick start: Using alternate HTTP web-root](doc/cookbook/quick-web-root.md)
 * [Adding a new service (Mailcatcher)](doc/cookbook/mailcatcher.md)
 * [Using PhpStorm with nix PHP](doc/cookbook/phpstorm.md)
-* [Using locolamp in the default shel](doc/cookbook/default-shell.md)
+* [Using locolamp in the default shell](doc/cookbook/default-shell.md)

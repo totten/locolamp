@@ -7,7 +7,7 @@ This is small demonstration of the  [nix package manager](https://nixos.org/nix/
 Install the [nix package manager](https://nixos.org/nix/):
 
 ```
-curl https://nixos.org/nix/install | sh
+$ curl https://nixos.org/nix/install | sh
 ```
 
 And then run:
@@ -20,11 +20,11 @@ $ nix-shell
 [nix-shell]$ loco run
 ```
 
-This will create a RAM-disk, initialize the data/configuration files in `.loco/var`, and launch the services in the foreground.  You can then open a web page, e.g.
+The last command (`loco run`) starts the services (e.g. Apache + MySQL etal). It creates a RAM-disk for storing service data (`.loco/var`); initializes the data/configuration files; and launch the services in the foreground.  You can then open a web page, e.g.
 
 * http://127.0.0.1:8000/
 
-To run CLI commands (such as `php` or `mysql`), open a new console tab and open `nix-shell` again:
+To run CLI commands (such as `php` or `mysql`), open a new console tab and start `nix-shell` again:
 
 ```
 $ cd locolamp
